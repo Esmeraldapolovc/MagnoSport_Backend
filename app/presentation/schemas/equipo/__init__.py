@@ -1,0 +1,2 @@
+from .agreagarEquioSchema import AgregarEquipoSchema
+from .actualizarEquipoSchema import ActualizarEquipoSchema

@@ -1,0 +1,3 @@
+from .agregarNoticiaSchema import AgregarNoticiaSchema
+from .actualizarNoticiaSchemas import ActualizarNoticiaSchema
+from .eliminarNoticiaSchema import EliminarNoticiaSchema

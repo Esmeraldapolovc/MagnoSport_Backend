@@ -1,0 +1,4 @@
+from .usuarioCreateSchema import UsuarioCreateSchema
+from .usuarioLoginSchema import UsuarioLoginSchema
+from .alumnCreateSchema import AlumnoCreateSchema
+from .usuarioDeleteSchema import UsuarioDeleteSchema

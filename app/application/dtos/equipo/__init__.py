@@ -1,0 +1,2 @@
+from .agregarEquipoDTO import AgregarEquipoDTO
+from .actualizarEquipoDTO import ActualizarEquipoDTO

@@ -1,0 +1,3 @@
+from .AgregarNoticiaDTO import AgregarNoticiaDTO
+from .actualizarNoticiaDTO import ActualizarNoticiaDTO
+from .eliminarNoticiaDTO import EliminarNoticiaDTO
