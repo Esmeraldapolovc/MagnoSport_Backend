@@ -12,7 +12,7 @@ class SeedrsLicenciatura:
         db = SessionLocal()
         logger.info("Iniciando el proceso de seeding de Licenciaturas...")
 
-        licenciatura = ["psicopedagogia", "Fisioterapia"]
+        licenciatura = ["Entrenamiento Deportivo", "Finanzas y Contabilidad", "Psicopedagogía", "Administración de Negocios", "Fisoterapia"]
         NIVEL_LICENCIATURA = 2
 
         try:

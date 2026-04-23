@@ -1,8 +1,6 @@
 import logging
 from app.persistence.models.usuario import Usuario
 from app.infrastructure.database import SessionLocal
-# Asumiendo que usas una librería para el hash de contraseñas
-# de lo contrario, asegúrate de procesarla antes de guardarla.
 from passlib.context import CryptContext 
 
 logger = logging.getLogger(__name__)
