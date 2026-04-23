@@ -97,7 +97,8 @@ class HorarioRepository(IHorarioRepository):
                      joinedload(HorarioModel.excepciones))\
             .all()
     
-    def buscarPorFecha(self, fecha: date) -> List[HorarioModel]:  # Cambiar a List
+    def buscarPorFecha(self, fecha: date) -> List[HorarioModel]: 
+     
      dia_semana = fecha.weekday() + 1
      return self.db.query(HorarioModel)\
         .join(HorarioModel.dias)\
