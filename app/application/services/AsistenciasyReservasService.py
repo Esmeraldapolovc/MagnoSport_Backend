@@ -120,7 +120,7 @@ class AsistenciasyReservasService(IAsistenciasyReservasService):
                                 "motivoCancelacion": motivo
                             })
             
-            # --- Construcción del bloque con IDs mejorados ---
+            # --- Construcción del bloque con IDs ---
             bloque_data = {
                 "horaInicio": t_ini.strftime("%H:%M"),
                 "horaFin": t_end.strftime("%H:%M"),
@@ -266,7 +266,7 @@ class AsistenciasyReservasService(IAsistenciasyReservasService):
                                 "motivoCancelacion": motivo
                             })
             
-            # --- Construcción del bloque con IDs mejorados ---
+            # --- Construcción del bloque con IDs  ---
             bloque_data = {
                 "horaInicio": t_ini.strftime("%H:%M"),
                 "horaFin": t_end.strftime("%H:%M"),

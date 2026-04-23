@@ -64,12 +64,12 @@ class ReservaService(IReservaService):
      if not area:
         raise ValueError("El área no existe")
     
-    # 5. Verificar usuario
+    #  Verificar usuario
      usuariodb = self.repositoryUsuario.obtenerUsuarioPorId(dto.usuarioId)
      if not usuariodb:
         raise ValueError("Usuario no encontrado")
 
-    # 6. Verificar reservas existentes
+    #  Verificar reservas existentes
      if usuariodb.rol in [2, 3, 4]:
         reservas_existentes = self.repository.listaReservas(
             dto.fechaReserva, dto.horaInicio, dto.horaFin
@@ -178,15 +178,15 @@ class ReservaService(IReservaService):
     
     #Muestra el horario para la semana actual y las reservas echas por el usuario que inicio sesion 
     def obtenerAgendaRangoUsuario(self, dto: ObtenerAgendaDTO):
-        # 1. Limpieza automática de retrasos
+        # Limpieza automática de retrasos
         self.repository.cancelarReservasPorRetraso()
 
-        # 2. Configuración de la semana actual (Lunes a Sábado)
+        #  Configuración de la semana actual (Lunes a Sábado)
         hoy = date.today()
         lunes_actual = hoy - timedelta(days=hoy.weekday())
         sabado_actual = lunes_actual + timedelta(days=5)
 
-        # 3. Obtener datos de la BD
+        #  Obtener datos de la BD
         horarios_db = self.repository.obtenerAgendaRangoUsuario(lunes_actual, sabado_actual, dto.usuarioId)
         resultado_agenda = []
 
@@ -381,8 +381,8 @@ class ReservaService(IReservaService):
             "estado_fisico_maquina": estado_fisico_maquina.value if hasattr(estado_fisico_maquina, 'value') else str(estado_fisico_maquina),
             "ocupacion_global": ocupacion_global,
             "mensaje": mensaje,
-            "hora_inicio_uso": hora_inicio_uso,  # Nueva campo
-            "hora_fin_uso": hora_fin_uso         # Nueva campo
+            "hora_inicio_uso": hora_inicio_uso,  
+            "hora_fin_uso": hora_fin_uso         
         })
 
      return detalle
@@ -415,7 +415,7 @@ class ReservaService(IReservaService):
         fecha_consulta = lunes_actual + timedelta(days=i)
         dia_semana_id = i + 1 
         
-        # 1. Filtramos los horarios que aplican para este día de la semana
+        #  Filtramos los horarios que aplican para este día de la semana
         # Nota: Usamos una lista en lugar de next() por si hay horarios solapados
         horarios_del_dia = [h for h in horarios_db if any(d.idDia == dia_semana_id for d in h.dias)]
         
@@ -428,14 +428,14 @@ class ReservaService(IReservaService):
             estado_bloque = "SIN PROGRAMACIÓN"
             tipo_bloque = "VACÍO"
             horario_id_bloque = None
-            # 2. Lógica de Horario Regular y Excepciones
+            #  Lógica de Horario Regular y Excepciones
             for h_busqueda in horarios_del_dia:
                 if h_busqueda.horaInicio <= t_ini < h_busqueda.horaFin:
                     estado_bloque = getattr(h_busqueda.estado, 'value', h_busqueda.estado)
                     tipo_bloque = "REGULAR"
                     horario_id_bloque = h_busqueda.idHorario
                     
-                    # --- CORRECCIÓN: Filtrar y ordenar excepciones por ID descendente ---
+                    # ---  Filtrar y ordenar excepciones por ID descendente ---
                     excepciones_validas = [
                         ex for ex in h_busqueda.excepciones 
                         if ex.fechaInicio <= fecha_consulta <= ex.fechaFin
@@ -450,7 +450,7 @@ class ReservaService(IReservaService):
                     
                     break # Encontramos el horario base para esta hora, pasamos a las reservas
 
-            # 3. Lógica de Reservas (Misma lógica de búsqueda)
+            #  Lógica de Reservas (Misma lógica de búsqueda)
             mi_reserva = None
             for h_item in horarios_db:
                 res = next((r for r in h_item.reservas 

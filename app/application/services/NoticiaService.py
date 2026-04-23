@@ -6,7 +6,6 @@ from datetime import date, datetime
 import pendulum
 import pytz
 from datetime import datetime
-# ... tus otros imports
 class NoticiaService(INoticiaService):
     
     def __init__(self, noticia_repository: INoticiaRepo):

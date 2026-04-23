@@ -110,7 +110,7 @@ class HorarioService(IHorarioService):
                 excepciones_ordenadas = sorted(
                     horario_encontrado.excepciones,
                     key=lambda ex: ex.idExcepcion,
-                    reverse=True  # La más reciente primero (ID más alto)
+                    reverse=True  
                 )
                 
                 # Buscar la PRIMERA excepción que aplique (la más reciente)

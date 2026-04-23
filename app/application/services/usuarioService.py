@@ -346,12 +346,12 @@ class UsuarioService(IUsuarioService):
     
 
     def actualizarAlumnoAdmin(self, dto: AlumnoUpdateDTO, archivoFoto = None) -> str:
-    # 1. Buscamos al usuario (que es la base de todo)
+    # Buscamos al usuario (que es la base de todo)
      usuarioActual = self.repository.obtenerUsuarioPorId(dto.idUsuario)
      if not usuarioActual:
         raise ValueError("El usuario base no existe en el sistema")
 
-    # 2. Intentamos buscar al alumno
+    # Intentamos buscar al alumno
      alumnoExistente = self.repository.obtenerAlumnoPorId(dto.idUsuario)
  
     # Validar correo (si cambió y ya existe en otro usuario)
@@ -360,7 +360,7 @@ class UsuarioService(IUsuarioService):
         if self.repository.buscarPorCorreo(correovalidar):
             raise ValueError(f"El correo {dto.correo} ya está registrado")
 
-    # 3. Preparar entidades de catálogo
+    # Preparar entidades de catálogo
      entidadRol = self.repositoryRol.obtenerRol(dto.rolId)
      entidadNivel = self.repositoryNivel.obtenerNivel(dto.nivelId)
     
@@ -370,19 +370,18 @@ class UsuarioService(IUsuarioService):
             raise ValueError("Debe proporcionar una licenciatura para este nivel.")
         entidadLic = self.repositoryLic.obtenerLicenciatura(dto.licId)
 
-    # 4. Manejo de Foto (Misma lógica que ya tenías)
+    #  Manejo de Foto (Misma lógica que ya tenías)
     # Si no hay alumno, usamos la foto del usuario actual
      foto_anterior = alumnoExistente.foto if alumnoExistente else usuarioActual.foto
      nombrefoto = foto_anterior
-    # ... (aquí va tu bloque de guardado de archivoFoto que ya tienes) ...
 
-    # 5. Gestionar Contraseña
+    # Gestionar Contraseña
      if dto.contrasenia and dto.contrasenia.strip():
         password_final = Security.hash_password(dto.contrasenia)
      else:
         password_final = usuarioActual.contrasenia
 
-    # 6. Crear objeto de dominio Alumno con los datos nuevos
+    #  Crear objeto de dominio Alumno con los datos nuevos
      alumnoDatos = Alumno(
         nombre=dto.nombre,
         correo=dto.correo,
@@ -396,7 +395,6 @@ class UsuarioService(IUsuarioService):
     )
      alumnoDatos.idUsuario = dto.idUsuario
 
-    # --- LÓGICA CRÍTICA ---
      if not alumnoExistente:
         # SI EL USUARIO EXISTE PERO EL ALUMNO NO: Lo creamos
         print(f"Creando registro de alumno para el usuario {dto.idUsuario}")
