@@ -1,6 +1,5 @@
 from passlib.context import CryptContext
 
-# 'schemes' define el algoritmo y 'deprecated' ayuda si en el futuro se quiere cambiar a uno mas nuevo
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 
 
